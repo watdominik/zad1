@@ -3,8 +3,8 @@ from main import EmailExtractorTestCase
 
 class UniTest(unittest.TestSuite):
     def __init__(self):
-        super().__init__()
-        self.addTests(unittest.makeSuite(EmailExtractorTestCase))
+        tests = unittest.defaultTestLoader.loadTestsFromTestCase(EmailExtractorTestCase)
+        super().__init__(tests)
 
 if __name__ == '__main__':
     runner = unittest.TextTestRunner(verbosity=2)
