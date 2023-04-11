@@ -1,5 +1,6 @@
 import unittest
 
+from mail import EmailExtractor
 
 class EmailExtractorTestCase(unittest.TestCase):
     def setUp(self) -> None:
@@ -15,18 +16,17 @@ class EmailExtractorTestCase(unittest.TestCase):
             ["michal.janowski@student.wat.edu.pl", True, True, "Michal", "Janowski"],
             ["dorota.kaminska@wat.edu.pl", False, False, "Dorota", "Kaminska"],
             ["kamil.kruk@wat.edu.pl", False, True, "Kamil", "Kruk"],
-            ["maria.zawadzka@wat.edu.pl", False, False, "Maria, "Zawadzka"],
+            ["maria.zawadzka@wat.edu.pl", False, False, "Maria", "Zawadzka"],
             ["lukasz.wojtas@student.wat.edu.pl", True, True, "Lukasz", "Wojtas"],
             ["katarzyna.wlodarczyk@wat.edu.pl", False, False, "Katarzyna", "Wlodarczyk"],
             ["marek.pawlowski@student.wat.edu.pl", True, True, "Marek", "Pawlowski"],
-            ["anna.lewandowska@student.wat.edu.pl", True, False, "Katarzyna", "Babacka"],]
+            ["anna.lewandowska@student.wat.edu.pl", True, False, "Anna", "Lewandowska"],]
 
     def test_is_student(self):
         for x in self.data:
             with self.subTest():
                 # given
-                mail = x[0]
-                to
+                email = x[0]
                 is_student = x[1]
                 # then
                 extractor = EmailExtractor(email)
@@ -35,15 +35,14 @@ class EmailExtractorTestCase(unittest.TestCase):
 
     def test_is_male(self):
         for x in self.data:
-            with self.subTest(): to
             with self.subTest():
                 # given
                 email = x[0]
-                name = x[3]
+                is_male = x[2]
                 # then
                 extractor = EmailExtractor(email)
                 # expect
-                self.assertEqual(name, extractor.get_name())
+                self.assertEqual(is_male, extractor.is_male())
 
     def test_get_surname(self):
         for x in self.data:
@@ -54,4 +53,22 @@ class EmailExtractorTestCase(unittest.TestCase):
                 # then
                 extractor = EmailExtractor(email)
                 # expect
-                self.assertEqual(surntoame, extractor.get_surname())
+                self.assertEqual(surname, extractor.get_surname())
+
+    def test_get_name(self):
+        for x in self.data:
+            with self.subTest():
+                # given
+                email = x[0]
+                name = x[3]
+                # then
+                extractor = EmailExtractor(email)
+                # expect
+                self.assertEqual(name, extractor.get_name())
+
+
+
+
+
+
+
